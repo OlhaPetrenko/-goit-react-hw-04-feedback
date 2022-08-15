@@ -1,0 +1,16 @@
+.btn {
+  margin: 5px;
+  min-width: 100px;
+  min-height: 30px;
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  border: transparent;
+}
+
+.btn:hover,
+.btn:focus {
+  color: teal;
+  background-color: #fff;
+  border: 2px solid teal;
+}

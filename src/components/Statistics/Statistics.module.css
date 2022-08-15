@@ -1,0 +1,25 @@
+.list {
+  display: flex;
+}
+
+.item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 15px;
+  background-color: teal;
+  padding: 5px;
+  border: 2px solid rgb(0, 72, 255);
+  border-radius: 5px;
+  min-width: 200px;
+  text-align: center;
+}
+
+.itemText {
+  color: white;
+}
+
+.itemNum {
+  font-weight: 500;
+  color: rgb(7, 42, 132);
+}

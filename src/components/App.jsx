@@ -1,4 +1,10 @@
 import { Component } from 'react';
+import Statistics from './Statistics';
+import FeedbackOptions from './FeedbackOptions';
+import Notification from './Notification';
+import Section from './Section';
+
+import s from './App.module.css';
 
 class App extends Component {
   state = {
@@ -6,6 +12,7 @@ class App extends Component {
     neutral: 0,
     bad: 0,
   };
+
   handleClick = feedbackName => {
     this.setState(prevState => {
       return {
@@ -18,14 +25,14 @@ class App extends Component {
     const { good, neutral, bad } = this.state;
     return good + neutral + bad;
   }
-  countPositiveFeedbackPercentage() {
+  countPositivePercentage() {
     const { good } = this.state;
     const total = this.countTotalFeedback();
     if (!total) {
       return 0;
     }
-    const PositiveFeedbackPercentage = (good / total) * 100;
-    return PositiveFeedbackPercentage;
+    const positivePercentage = (good / total) * 100;
+    return positivePercentage;
   }
 
   render() {
@@ -33,50 +40,31 @@ class App extends Component {
     const { handleClick } = this;
     const total = this.countTotalFeedback();
 
-    const positiveFeedback = this.countPositiveFeedbackPercentage();
+    const positivePercentage = Number(
+      this.countPositivePercentage().toFixed(2)
+    );
     return (
-      <div>
-        <div>
-          <h2>Please leave feedback</h2>
-          <button type="button" onClick={() => handleClick('good')}>
-            Good
-          </button>
-          <button type="button" onClick={() => handleClick('neutral')}>
-            Neutral
-          </button>
-          <button type="button" onClick={() => handleClick('bad')}>
-            Bad
-          </button>
-        </div>
-        <div>
-          <h2>Statistics </h2>
-          <ul>
-            <li>Good: {good}</li>
-            <li>Neutral: {neutral}</li>
-            <li>Bad: {bad}</li>
-            <li>Total: {total}</li>
-            <li>Positive feedback: {Number(positiveFeedback.toFixed(2))}%</li>
-          </ul>
-        </div>
+      <div className={s.set}>
+        <Section title="Please leave feedback">
+          <FeedbackOptions onLeaveFeedback={this.handleClick} />
+        </Section>
+
+        <Section title="Statistics">
+          {total ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positivePercentage={positivePercentage}
+            />
+          ) : (
+            <Notification message="There is no feedback" />
+          )}
+        </Section>
       </div>
     );
   }
 }
-// export const App = () => {
-//   return (
-//     <div
-//     // style={{
-//     //   height: '100vh',
-//     //   display: 'flex',
-//     //   justifyContent: 'center',
-//     //   alignItems: 'center',
-//     //   fontSize: 40,
-//     //   color: '#010101',
-//     // }}
-//     >
-//       <Feedback />
-//     </div>
-//   );
-// };
 
 export default App;
