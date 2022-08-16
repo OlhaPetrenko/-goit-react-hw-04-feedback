@@ -43,12 +43,13 @@ class App extends Component {
     const positivePercentage = Number(
       this.countPositivePercentage().toFixed(2)
     );
+
     return (
       <div className={s.set}>
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={['good', 'neutral', 'bad']}
-            onLeaveFeedback={this.handleClick}
+            onLeaveFeedback={handleClick}
           />
         </Section>
 
